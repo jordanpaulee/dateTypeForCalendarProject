@@ -21,69 +21,9 @@ dateType::dateType(int month, int day, int year){
 //public functions
   //setters
 void dateType::setDate(int month , int day, int year){
-  
-  if (year < 1900){
-    dYear = 1900;
-    // assuming there was a typo in header file.  
-  }
-  else{
-    dYear=year;
-  }
-  
-  if(month < 1 || month > 12){
-    dMonth=1;
-  }
-  else{
-    dMonth=month;
-  }
-
-  if (month == 2){
-    if(isLeapYear()){
-      if (day < 1 || day > 29){
-        dDay=1;
-      }
-      else{
-        dDay=day;
-      }
-    }
-    else{
-      if(day < 1 || day > 28){
-        dDay=1;
-      }
-      else{
-        dDay=day;
-      }
-    }
-  }
-  else{};
-  
-  for (int i=0; i < 7; i++){
-    if (month == longMonth[i] && month != 2){
-      if (day < 1 || day > 31){
-        dDay=1;
-        break;
-      }
-      else{
-        dDay=day;
-        break;
-      }
-    }
-    else{}
-  };
-
-  for (int i=0; i < 4 ; i++){
-    if(month == shortMonth[i] && month != 2){
-      if (day < 1 || day > 30){
-        dDay=1;
-        break;
-      }
-      else{
-        dDay=day;
-        break;
-      }
-    }
-    else{}
-  };
+  dateType::setMonth(month);
+  dateType::setDay(day);
+  dateType::setYear(year);
 };
 
 void dateType::setMonth(int month){
@@ -115,7 +55,7 @@ void dateType::setDay(int day){
     }
   }
   else{
-    for (int i=0; i < 6; i++){
+    for (int i=0; i <= 6; i++){
       if (dMonth == longMonth[i] && dMonth != 2){
         if (day < 1 || day > 31){
           dDay=1;
@@ -128,7 +68,7 @@ void dateType::setDay(int day){
       }
     }
 
-    for (int i=0; i < 5; i++){
+    for (int i=0; i <= 3; i++){
       if(dMonth == shortMonth[i] && dMonth != 2){
         if (day < 1 || day > 30){
           dDay=1;
@@ -225,7 +165,7 @@ void dateType::incrementDate(int nDays){
       dDay=366-dayCount;
     }
     else{
-      for(int i=0; i < 11; i++){
+      for(int i=0; i <= 11; i++){
         if(dayCount > daysMonthLeap[i] && dayCount < daysMonthLeap[i+1]){
           dMonth=i+2;
           dDay=dayCount-daysMonthLeap[i];
@@ -253,7 +193,7 @@ void dateType::incrementDate(int nDays){
       dDay=365-dayCount;
     }
     else{
-      for(int i=0; i < 11; i++){
+      for(int i=0; i <= 11; i++){
         if(dayCount > daysMonthNoLeap[i] && dayCount < daysMonthNoLeap[i+1]){
           dMonth=i+2;
           dDay=dayCount-daysMonthNoLeap[i];
@@ -293,7 +233,7 @@ int dateType::getDaysInMonth(){
     else{
     };
     
-    for (int i=0; i < 7; i++){
+    for (int i=0; i <= 6; i++){
       if (dMonth == longMonth[i] && dMonth != 2){
         return 31;
         break;
@@ -302,7 +242,7 @@ int dateType::getDaysInMonth(){
       }
     };
 
-    for (int i=0; i < 4 ; i++){
+    for (int i=0; i <= 3 ; i++){
       if(dMonth == shortMonth[i] && dMonth != 2){
         return 30;
         break;
